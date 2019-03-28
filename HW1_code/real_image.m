@@ -1,4 +1,4 @@
-function ret=real_image(g,color,B)
+function ret=real_image(g,color,B,scale)
     Zmax=255;
     Zmin=0;
     %B=[-10:5];
@@ -6,11 +6,13 @@ function ret=real_image(g,color,B)
     
     [P,name]=get_pic();
     RGB = imread(name(1,:));
+    RGB=imresize(RGB,scale);
     [m,n,q]=size(RGB);
     RGB_array=zeros(m,n,P);
     
     for index=1:P
         RGB = imread(name(index,:));
+        RGB=imresize(RGB,scale);
         RGB_array(:,:,index)=RGB(:,:,color);
     end
     output_hdr=zeros(m,n);
