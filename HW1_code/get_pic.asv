@@ -17,17 +17,7 @@ function [P,name]=get_pic()
     %}
     
     P=5;
-    name=['IMG_0690.JPG',
-        'IMG_0691.JPG',
-        'IMG_0692.JPG',
-        'IMG_0693.JPG',
-        'IMG_0694.JPG',
-        'IMG_0695.JPG',
-        'IMG_0696.JPG',
-        'IMG_0697.JPG',
-        'IMG_0698.JPG',
-        'IMG_0699.JPG',
-        'IMG_0700.JPG',
+    name=['IMG_0700.JPG',
         'IMG_0701.JPG',
         'IMG_0702.JPG',
         'IMG_0703.JPG',
