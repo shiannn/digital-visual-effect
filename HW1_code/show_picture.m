@@ -2,7 +2,7 @@ function ret=show_picture()
     P=16;
     N=50;
     
-    pixel_value=zeros(N,P);
+    pixel_value=zeros(N,P,3);
     for index=61:76
         str=int2str(index);
         name=['memorial00',str,'.png'];
@@ -15,7 +15,9 @@ function ret=show_picture()
             y=round(y);
         end
         for i=1:N
-            pixel_value(i,index-60)=RGB(y(i),x(i),1);
+            pixel_value(i,index-60,1)=RGB(y(i),x(i),1);
+            pixel_value(i,index-60,2)=RGB(y(i),x(i),2);
+            pixel_value(i,index-60,3)=RGB(y(i),x(i),3);
         end
         pixel_value;
         %choose particular pixel and get their RGB

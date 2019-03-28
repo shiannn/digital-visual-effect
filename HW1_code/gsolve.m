@@ -11,38 +11,50 @@ function [g,lE]=gsolve(~,~,lambda)%~¨ú¥NZ B
     Zmax=255;
     Zmin=0;
     n=256;
+    g=zeros(n,3);
     A=zeros(size(Z,1)*size(Z,2)+n+1,n+size(Z,1));
     b=zeros(size(A,1),1);
     
-    k=1;
-    for i=1:size(Z,1)
-        for j=1:size(Z,2)
-            temp=weighting(Zmax,Zmin,Z(i,j)+1);
-            %0~255=>1~256
-            A(k,Z(i,j)+1)=temp;
-            A(k,n+i)=-temp;
-            b(k,1)=temp*B(j);
-            k=k+1;
+    for color=1:3
+        k=1;
+        for i=1:size(Z,1)
+            for j=1:size(Z,2)
+                temp=weighting(Zmax,Zmin,Z(i,j,color)+1);
+                %0~255=>1~256
+                A(k,Z(i,j)+1)=temp;
+                A(k,n+i)=-temp;
+                b(k,1)=temp*B(j);
+                k=k+1;
+            end
         end
-    end
-    A(k,127)=1;
-    k=k+1;
-    for i=1:n-2
-        A(k,i)=lambda*weighting(Zmax,Zmin,i+1);
-        A(k,i+1)=-2*lambda*weighting(Zmax,Zmin,i+1);
-        A(k,i+2)=lambda*weighting(Zmax,Zmin,i+1);
+        A(k,127)=1;
         k=k+1;
+        for i=1:n-2
+           A(k,i)=lambda*weighting(Zmax,Zmin,i+1);
+           A(k,i+1)=-2*lambda*weighting(Zmax,Zmin,i+1);
+           A(k,i+2)=lambda*weighting(Zmax,Zmin,i+1);
+           k=k+1;
+        end
+        x=A\b;
+        g(:,color)=x(1:n);
+        size(g);
+        domain=[1:256];
+         range=g(domain);
+         plot(range,domain);
+         lE=x(n+1:size(x,1));
     end
-    x=A\b;
-    g=x(1:n);
-    size(g);
-    domain=[1:256];
-    range=g(domain);
-    plot(range,domain);
-    lE=x(n+1:size(x,1));
     
-    ret=real_image(g);
-    art=tonemap(ret);
-    image(art);
+    g;
+    ret1=real_image(g(:,1),1);
+    ret2=real_image(g(:,2),2);
+    ret3=real_image(g(:,3),3);
+    
+    art1=tonemap(ret1);
+    art2=tonemap(ret2);
+    art3=tonemap(ret3);
+    
+    art=cat(3,art1,art2,art3);
+    art=1.5*art;
+    imshow(art);
 end
 
