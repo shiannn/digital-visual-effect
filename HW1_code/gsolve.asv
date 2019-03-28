@@ -3,7 +3,7 @@ function [g,lE]=gsolve(~,~,lambda,N)%~取代Z B
     size(Z);
     %Z(i,j,k) 第i個選點 在第j張照片 第k種顏色
     %B=flip([-10:5]);
-    B=flip([-10:2]);
+    B=flip([-10:0]);
     
     %Z是N*P矩陣 每張照片N個pixel的0~255 P張照片
     %RGB 3個顏色都有0~255
@@ -37,21 +37,15 @@ function [g,lE]=gsolve(~,~,lambda,N)%~取代Z B
            k=k+1;
         end
         x=A\b;
-         g(:,color)=x(1:n);
+        g(:,color)=x(1:n);
+        size(g);
+        domain=[1:256];
+         range=g(domain);
+         plot(range,domain)
          lE=x(n+1:size(x,1));
     end
     
-%     g;
-%     domain=[1:256];
-%     range=g(domain,1);
-%     plot(range,domain)
-%     hold on
-%     range=g(domain,2);
-%     plot(range,domain)
-%     hold on
-%     range=g(domain,3);
-%     plot(range,domain)
-         
+    g;
     ret1=real_image(g(:,1),1,B);
     ret2=real_image(g(:,2),2,B);
     ret3=real_image(g(:,3),3,B);
@@ -62,7 +56,6 @@ function [g,lE]=gsolve(~,~,lambda,N)%~取代Z B
     
     art=cat(3,art1,art2,art3);
     art=1.5*art;
-    %imshow(art);
-    
+    imshow(art);
 end
 
