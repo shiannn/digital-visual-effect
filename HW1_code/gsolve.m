@@ -5,7 +5,8 @@ function [g,lE]=gsolve(~,~,lambda,N,scale)%~取代Z B
     %B=flip([-10:5]);
     %B=flip([-4:8]);
     %B=[1:5];
-    B=[-7:5];
+    %B=[-3:4];
+    B=[8:13];
     
     %Z是N*P矩陣 每張照片N個pixel的0~255 P張照片
     %RGB 3個顏色都有0~255
@@ -67,7 +68,7 @@ function [g,lE]=gsolve(~,~,lambda,N,scale)%~取代Z B
     art3=tonemap(ret3);
     
     art=cat(3,art1,art2,art3);
-    %imshow(art);
+    imwrite(art,['output.jpg']);
     
 end
 
