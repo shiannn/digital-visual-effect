@@ -21,23 +21,23 @@ function [P,name]=get_pic()
 %         'IMG_0703.JPG',
 %         'IMG_0704.JPG'];
     
-%     P=16;
-%     name=['memorial0061.png',
-%         'memorial0062.png',
-%         'memorial0063.png',
-%         'memorial0064.png',
-%         'memorial0065.png',
-%         'memorial0066.png',
-%         'memorial0067.png',
-%         'memorial0068.png',
-%         'memorial0069.png',
-%         'memorial0070.png',
-%         'memorial0071.png',
-%         'memorial0072.png',
-%         'memorial0073.png',
-%         'memorial0074.png',
-%         'memorial0075.png',
-%         'memorial0076.png'];
+    P=16;
+    name=['memorial0061.png',
+        'memorial0062.png',
+        'memorial0063.png',
+        'memorial0064.png',
+        'memorial0065.png',
+        'memorial0066.png',
+        'memorial0067.png',
+        'memorial0068.png',
+        'memorial0069.png',
+        'memorial0070.png',
+        'memorial0071.png',
+        'memorial0072.png',
+        'memorial0073.png',
+        'memorial0074.png',
+        'memorial0075.png',
+        'memorial0076.png'];
 
 %output5
 % P=5;
@@ -74,22 +74,22 @@ function [P,name]=get_pic()
 
 
 %output2
-P=15;
-    name=['IMG_0690.JPG',
-        'IMG_0691.JPG',
-        'IMG_0692.JPG',
-        'IMG_0693.JPG',
-        'IMG_0694.JPG',
-        'IMG_0695.JPG',
-        'IMG_0696.JPG',
-        'IMG_0697.JPG',
-        'IMG_0698.JPG',
-        'IMG_0699.JPG',
-        'IMG_0700.JPG',
-        'IMG_0701.JPG',
-        'IMG_0702.JPG',
-        'IMG_0703.JPG',
-        'IMG_0704.JPG'];
+% P=15;
+%     name=['IMG_0690.JPG',
+%         'IMG_0691.JPG',
+%         'IMG_0692.JPG',
+%         'IMG_0693.JPG',
+%         'IMG_0694.JPG',
+%         'IMG_0695.JPG',
+%         'IMG_0696.JPG',
+%         'IMG_0697.JPG',
+%         'IMG_0698.JPG',
+%         'IMG_0699.JPG',
+%         'IMG_0700.JPG',
+%         'IMG_0701.JPG',
+%         'IMG_0702.JPG',
+%         'IMG_0703.JPG',
+%         'IMG_0704.JPG'];
 
 %output.jpg
 % P=13;

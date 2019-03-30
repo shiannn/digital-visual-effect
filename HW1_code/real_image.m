@@ -26,9 +26,6 @@ function ret=real_image(g,color,B,scale)
             end
             lnE=up/down;
             E=exp(lnE);
-%             if color==2
-%                 E
-%             end
             output_hdr(i,j)=lnE;
         end
     end

@@ -1,4 +1,4 @@
-function [g,lE]=gsolve(~,~,lambda,N,scale,B)%~取代Z B
+function [g,lE]=gsolve(~,~,lambda,N,scale,B,radiance)%~取代Z B
     Z=show_picture(N);
     size(Z);
     %Z(i,j,k) 第i個選點 在第j張照片 第k種顏色
@@ -55,27 +55,31 @@ function [g,lE]=gsolve(~,~,lambda,N,scale,B)%~取代Z B
 %     range=g(domain,3);
 %     plot(range,domain)
          
-    ret1=real_image(g(:,1),1,B,scale);
-    %ret1=ret1./(ret1+1);
-    %art1=tonemap(ret1);
-    
+    ret1=real_image(g(:,1),1,B,scale); 
     ret2=real_image(g(:,2),2,B,scale);
-    %ret2=ret2./(ret2+1);
-    %art2=tonemap(ret2);
-    
     ret3=real_image(g(:,3),3,B,scale);
-    %ret3=ret3./(ret3+1);
-    %art3=tonemap(ret3);
     
-    %ret1=30*ret1
-    imshow(ret2);
-    caxis([min(min(ret2)),max(max(ret2))]);
-    colormap jet;
-    colorbar 
     
-     %art=cat(3,art1,art2,art3);
-     %imwrite(art,['output.jpg']);
-     %imshow(art);
-    
+    if(radiance==1)
+        imshow(ret1);
+        caxis([min(min(ret1)),max(max(ret1))]);
+        colormap jet;
+        colorbar 
+    else
+        ret1=exp(ret1);
+        ret2=exp(ret2);
+        ret3=exp(ret3);
+        
+        ret1=ret1./(ret1+1);
+        ret2=ret2./(ret2+1);
+        ret3=ret3./(ret3+1);
+        
+        art1=tonemap(ret1);
+        art2=tonemap(ret2);
+        art3=tonemap(ret3);
+        
+        art=cat(3,art1,art2,art3);
+        imwrite(art,['output.jpg']);
+    end
 end
 
