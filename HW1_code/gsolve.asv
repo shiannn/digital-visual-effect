@@ -60,22 +60,20 @@ function [g,lE]=gsolve(~,~,lambda,N,scale,B)%~¨ú¥NZ B
     %art1=tonemap(ret1);
     
     ret2=real_image(g(:,2),2,B,scale);
-    %ret2=ret2./(ret2+1);
-    %art2=tonemap(ret2);
+    ret2=ret2./(ret2+1);
+    art2=tonemap(ret2);
     
     ret3=real_image(g(:,3),3,B,scale);
-    %ret3=ret3./(ret3+1);
-    %art3=tonemap(ret3);
+    ret3=ret3./(ret3+1);
+    art3=tonemap(ret3);
     
-    %ret1=30*ret1
-    imshow(ret2);
-    caxis([min(min(ret2)),max(max(ret2))]);
+    image(ret1,'CDataMapping','scaled')
+    caxis([0,0.0]);
     colormap jet;
     colorbar 
     
-     %art=cat(3,art1,art2,art3);
-     %imwrite(art,['output.jpg']);
-     %imshow(art);
+%     art=cat(3,art1,art2,art3);
+%     imwrite(art,['output.jpg']);
     
 end
 

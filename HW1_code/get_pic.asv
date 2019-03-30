@@ -49,7 +49,7 @@ function [P,name]=get_pic()
 
 
 
-%output4
+% output4
 % P=10;
 %   name=['IMG_0764.JPG',
 %         'IMG_0765.JPG',
@@ -74,22 +74,22 @@ function [P,name]=get_pic()
 
 
 %output2
-P=15;
-    name=['IMG_0690.JPG',
-        'IMG_0691.JPG',
-        'IMG_0692.JPG',
-        'IMG_0693.JPG',
-        'IMG_0694.JPG',
-        'IMG_0695.JPG',
-        'IMG_0696.JPG',
-        'IMG_0697.JPG',
-        'IMG_0698.JPG',
-        'IMG_0699.JPG',
-        'IMG_0700.JPG',
-        'IMG_0701.JPG',
-        'IMG_0702.JPG',
-        'IMG_0703.JPG',
-        'IMG_0704.JPG'];
+% P=15;
+%     name=['IMG_0690.JPG',
+%         'IMG_0691.JPG',
+%         'IMG_0692.JPG',
+%         'IMG_0693.JPG',
+%         'IMG_0694.JPG',
+%         'IMG_0695.JPG',
+%         'IMG_0696.JPG',
+%         'IMG_0697.JPG',
+%         'IMG_0698.JPG',
+%         'IMG_0699.JPG',
+%         'IMG_0700.JPG',
+%         'IMG_0701.JPG',
+%         'IMG_0702.JPG',
+%         'IMG_0703.JPG',
+%         'IMG_0704.JPG'];
 
 %output.jpg
 % P=13;
@@ -106,13 +106,15 @@ P=15;
 %         'IMG_0733.JPG',
 %         'IMG_0734.JPG',
 %         'IMG_0735.JPG'];
-% P=7;
-%     name=['IMG_0745.JPG',
-%         'IMG_0746.JPG',
-%         'IMG_0747.JPG',
-%         'IMG_0748.JPG',
-%         'IMG_0749.JPG',
-%         'IMG_0750.JPG',
-%         'IMG_0751.JPG'];
-% 
-% end
+P=13;
+    name=['IMG_0745.JPG',
+        'IMG_0746.JPG',
+        'IMG_0747.JPG',
+        'IMG_0748.JPG',
+        'IMG_0749.JPG',
+        'IMG_0750.JPG',
+        'IMG_0751.JPG',
+        'IMG_0752.JPG',
+        'IMG_0753.JPG'];
+
+end

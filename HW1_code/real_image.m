@@ -29,7 +29,7 @@ function ret=real_image(g,color,B,scale)
 %             if color==2
 %                 E
 %             end
-            output_hdr(i,j)=E;
+            output_hdr(i,j)=lnE;
         end
     end
     ret=output_hdr;
