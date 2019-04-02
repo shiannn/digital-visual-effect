@@ -1,8 +1,12 @@
-function ret=weighting(Zmax,Zmin,input)
+function ret=weighting(Zmax,Zmin)
     threshold=(1/2)*(Zmax+Zmin);
-    if(input>threshold)
-        ret=Zmax-input;
-    else
-        ret=input-Zmin;
+    w=zeros(256,1);
+    for i=1:256
+        if(i>threshold)
+            w(i)=Zmax-i;
+        else
+            w(i)=i-Zmin;
+        end
     end
+    ret=w;
 end
