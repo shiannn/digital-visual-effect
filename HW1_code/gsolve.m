@@ -1,4 +1,4 @@
-function [g,lE]=gsolve(lambda,N,radiance,g_plot)%~取代Z B
+function [g,lE]=gsolve(lambda,N,radiance,g_plot,photo)%~取代Z B
     [P1,Img1]=get_pic('.',1);
     temp_read1=imfinfo(Img1(1).name);
     scale=[temp_read1.Height,temp_read1.Width];
@@ -79,13 +79,26 @@ function [g,lE]=gsolve(lambda,N,radiance,g_plot)%~取代Z B
 %         ret2=ret2./(ret2+1);
 %         ret3=ret3./(ret3+1);
         
-        art1=tonemap(ret1);
-        art2=tonemap(ret2);
-        art3=tonemap(ret3);
+        if(photo==1)
+            ret=cat(3,ret1,ret2,ret3);
+            art=photographic_toneMapping(ret);
+            imshow(art);
+        else if(photo==2)
+            ret1=ret1./(ret1+1);
+            ret2=ret2./(ret2+1);
+            ret3=ret3./(ret3+1);
+            ret=cat(3,ret1,ret2,ret3);
+            art=my_tone_mapping(ret,0.72);
+            imshow(art);
+        else
+            art1=tonemap(ret1);
+            art2=tonemap(ret2);
+            art3=tonemap(ret3);
+            art=cat(3,art1,art2,art3);
+            imshow(art);
+            imwrite(art,'output.png');
+        end     
         
-        art=cat(3,art1,art2,art3);
-        imshow(art);
-        imwrite(art,'output.png');
     end
 end
 
