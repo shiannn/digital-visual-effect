@@ -1,23 +1,39 @@
-function ret=show_picture(N,color)
-    [P,Img]=get_pic('.',1);
-    pixel_value=zeros(N,P);
-    RGB = imread(Img(1).name);
-    [m,n,k]=size(RGB);
-    %rand出xy
-%     x=randi([1 n],N,1);
-%     y=randi([1 m],N,1);
-    rng(0,'twister');
-    y=floor(m*rand(N,1));
-    x=floor(n*rand(N,1));
+function [Z1,Z2,Z3]=show_picture(path,N,RGB_array)
+    [P,Img]=get_pic(path,'jpg');
+    Z1=zeros(N,P);
+    Z2=zeros(N,P);
+    Z3=zeros(N,P);
+    [m,n,scale]=get_size(path);
+    rng('default');
+    %寫在一起
+    
+%     RGB_array=zeros(m,n,3,P);
+%     for index=1:P
+%         RGB_array(:,:,:,index)=imresize(imread(Img(index).name),scale);
+%     end
+    
+    y1=floor(m*rand(N,1))+1;
+    x1=floor(n*rand(N,1))+1;
     for index=1:P
-        RGB = imread(Img(index).name);
         for i=1:N
-            pixel_value(i,index)=RGB(y(i),x(i),color);
-%             pixel_value(i,index,2)=RGB(y(i),x(i),2);
-%             pixel_value(i,index,3)=RGB(y(i),x(i),3);
+            Z1(i,index)=RGB_array(y1(i),x1(i),1,index);
         end
-        pixel_value;
-        %choose particular pixel and get their RGB
     end
-    ret=pixel_value;
+    
+    
+    y2=floor(m*rand(N,1))+1;
+    x2=floor(n*rand(N,1))+1;
+    for index=1:P
+        for i=1:N
+            Z2(i,index)=RGB_array(y2(i),x2(i),2,index);
+        end
+    end
+    
+    y3=floor(m*rand(N,1))+1;
+    x3=floor(n*rand(N,1))+1;
+    for index=1:P
+        for i=1:N
+            Z3(i,index)=RGB_array(y3(i),x3(i),3,index);
+        end
+    end
 end

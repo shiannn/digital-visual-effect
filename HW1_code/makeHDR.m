@@ -1,0 +1,97 @@
+function makeHDR()
+    path=num2str(input('input desired folder(0~15):'));
+    readin=input('1:get_pic 2:readImages');
+    if(readin==1)
+        [P,Img]=get_pic(path,'jpg');
+        [m,n,scale]=get_size(path);
+        RGB_array=zeros(m,n,3,P,'uint8');
+        for index=1:P
+            RGB_array(:,:,:,index)=imresize(imread([path,'/',Img(index).name]),scale);
+        end
+    elseif(readin==2)
+        Img=dir(fullfile(path,'*.jpg'));
+        RGB_array=readImages(Img,path);
+    else
+    end
+    
+    lambda=input('please input lambda:');
+    %[height,width]=get_size();
+    B=get_exposure(path);
+    fix=input('fix exposure:');
+    B=B+fix;
+    w=weighting();
+     
+    N=input('number of sample points:');
+    sam=input('1:show 2:Get');
+    if(sam==1)
+        [Z1,Z2,Z3]=show_picture(path,N,RGB_array);
+    elseif(sam==2)
+        [Z1,Z2,Z3]=GetSamplePoints(N,RGB_array);
+    else
+    end
+    
+    g1=gsolve(Z1,B,lambda,w);
+    g2=gsolve(Z2,B,lambda,w);
+    g3=gsolve(Z3,B,lambda,w);
+    
+    curve=input('1 response curve 0 no:');
+    if(curve==1)
+        domain=[1:256];
+        range=g1(domain);
+        plot(range,domain)
+        hold on
+        range=g2(domain);
+        plot(range,domain)
+        hold on
+        range=g3(domain);
+        plot(range,domain)
+        hold on
+    elseif(curve==0)
+    
+    else
+    end      
+    
+    turn_real=input('1:real 2:real2');
+    if(turn_real==1)
+        ret1=myreal_image(path,g1,RGB_array,1,B,w);
+        ret2=myreal_image(path,g2,RGB_array,2,B,w);
+        ret3=myreal_image(path,g3,RGB_array,3,B,w);
+    elseif(turn_real==2)
+        ret1=real_image2(g1,RGB_array(:,:,1,:),B,w);
+        ret2=real_image2(g2,RGB_array(:,:,2,:),B,w);
+        ret3=real_image2(g3,RGB_array(:,:,3,:),B,w);
+    else
+    end
+    
+    gamma = 0.025;
+    newImg=power(ret1,gamma);
+    figure;
+    %newImg=log(Red);
+    imshow(newImg,[],'Colormap',jet(256));
+    colorbar;
+    
+    
+    select=input('1:default tonemap 2:implement tonemap 3:photo');
+    if(select==1)
+        art1=tonemap(ret1);
+        art2=tonemap(ret2);
+        art3=tonemap(ret3);
+        art=cat(3,art1,art2,art3);
+    elseif(select==2)
+%         ret1=ret1./(1+ret1);
+%         ret2=ret2./(1+ret2);
+%         ret3=ret3./(1+ret3);
+        ret=cat(3,ret1,ret2,ret3);
+        a=input('a for photographic:');
+        art=my_tone_mapping(ret,a);
+    elseif(select==3)
+%         ret1=ret1./(1+ret1);
+%         ret2=ret2./(1+ret2);
+%         ret3=ret3./(1+ret3);
+        ret=cat(3,ret1,ret2,ret3);
+        art=photographic_toneMapping(ret);
+    else
+    end
+
+    imshow(art);
+end

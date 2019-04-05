@@ -1,0 +1,19 @@
+function ret=myreal_image(path,g,RGB_array,color,B,w)
+    m=size(RGB_array,1);
+    n=size(RGB_array,2);
+    P=size(RGB_array,4)
+    output_hdr=zeros(m,n);
+    for(i=1:m)
+        for(j=1:n)
+            down=0;
+            up=0;
+            for(k=1:P)
+                down=down+w(RGB_array(i,j,color,k)+1);
+                up=up+w(RGB_array(i,j,color,k)+1)*(g(RGB_array(i,j,color,k)+1)-B(k));
+            end
+            lnE=up/down;
+            output_hdr(i,j)=exp(lnE);
+        end
+    end
+    ret=output_hdr;
+end
